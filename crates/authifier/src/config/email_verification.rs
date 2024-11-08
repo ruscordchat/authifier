@@ -103,7 +103,7 @@ pub enum EmailVerificationConfig {
 impl SMTPSettings {
     /// Create SMTP transport
     pub fn create_transport(&self) -> SmtpTransport {
-        let relay = SmtpTransport::relay(&self.host).unwrap();
+        let relay = SmtpTransport::starttls_relay(&self.host).unwrap();
         let relay = if let Some(port) = self.port {
             relay.port(port.try_into().unwrap())
         } else {
